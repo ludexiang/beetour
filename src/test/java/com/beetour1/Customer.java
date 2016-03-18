@@ -1,4 +1,4 @@
-package com.beetour;
+package com.beetour1;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

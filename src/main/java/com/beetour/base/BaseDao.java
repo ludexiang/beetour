@@ -2,8 +2,9 @@ package com.beetour.base;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 
-public interface BaseDaoI<T> {
+public interface BaseDao<T> {
 	
 	void insert(T t);
 
@@ -15,7 +16,7 @@ public interface BaseDaoI<T> {
 
 	T selectById(T t);
 	
-	List<T> selectByExample(Class<T> t);
+	List<T> findAll(Class<T> t);
 
 	/**
 	 * 分页查询

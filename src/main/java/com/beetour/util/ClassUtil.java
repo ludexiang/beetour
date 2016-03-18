@@ -1,13 +1,10 @@
 package com.beetour.util;
 
 import java.lang.reflect.Field;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.data.annotation.Id;
-
-import com.beetour.order;
 
 /**
  * 操作类对象的工具类
@@ -39,6 +36,7 @@ public class ClassUtil {
 			field.setAccessible(true);
 			String name = field.getName();
 			Object value = field.get(obj);
+			@SuppressWarnings("unused")
 			Class<?> type = field.getType();
 			if (null != value) {
 				nameValue.put(name, value);

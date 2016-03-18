@@ -4,12 +4,18 @@ package com.beetour.base;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public  class BaseServiceImpl<T> implements BaseServiceI<T> {
+@Service
+public abstract class BaseServiceImpl<T> implements BaseService<T> {
+	
+	protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private BaseDaoI<T> dao;
+	private BaseDao<T> dao;
 
 	@Override
 	public void save(T entity) {
@@ -32,14 +38,17 @@ public  class BaseServiceImpl<T> implements BaseServiceI<T> {
 	}
 
 	@Override
-	public List<T> selectByExample(Class<T> t) {
-		return dao.selectByExample(t);
+	public List<T> findAll() {
+		return dao.findAll(getEntityClass());
 	}
 
 	@Override
 	public List<T> selectByPage(T t, int pageSize, int page) {
-		return dao.selectByPage(t, pageSize, (page * pageSize) - 1);
+		LOGGER.debug(String.valueOf(page));
+		System.out.println((page * pageSize) - 1);
+		return dao.selectByPage(t, pageSize, ((page - 1) * pageSize) - 1);
 	}
 	
+	protected abstract Class<T> getEntityClass();
 
 }

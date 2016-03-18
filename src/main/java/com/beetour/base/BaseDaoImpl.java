@@ -8,13 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
 import com.beetour.util.ClassUtil;
 import com.beetour.util.CriteriaUtil;
 
 
 @SuppressWarnings("unchecked")
-public abstract class BaseDaoImpl<T> implements BaseDaoI<T> {
+@Repository
+public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Autowired
 	protected MongoTemplate mongo;
@@ -59,7 +61,7 @@ public abstract class BaseDaoImpl<T> implements BaseDaoI<T> {
 	}
 
 	@Override
-	public List<T> selectByExample(Class<T> t) {
+	public List<T> findAll(Class<T> t) {
 		return (List<T>) mongo.findAll(t);
 	}
 

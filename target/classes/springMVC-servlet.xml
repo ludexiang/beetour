@@ -15,6 +15,8 @@
 	<!-- 对静态资源文件的访问 支持访问WEB-INF目录 -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:resources mapping="/images/**" location="/images/" />
+	
+
 
 	<!--RequestMappingHandlerAdapter -->
 	<!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射 -->
@@ -28,7 +30,6 @@
 
 	<!-- 启动包扫描功能，以便注册带有@Controller、@Service、@repository、@Component等注解的类成为spring的bean -->
 	<context:component-scan base-package="com.beetour" />
-
 	<!-- enable autowire -->
 	<!-- <context:annotation-config /> -->
 

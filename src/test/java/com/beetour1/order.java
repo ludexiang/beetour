@@ -1,4 +1,4 @@
-package com.beetour;
+package com.beetour1;
 
 import java.util.Date;
 import java.util.List;

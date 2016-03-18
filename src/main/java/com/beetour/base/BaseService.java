@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 /**
  * 通用接口
  */
-@Service
-public interface BaseServiceI<T> {
+public interface BaseService<T> {
 
 	void save(T entity);
 
@@ -20,7 +19,7 @@ public interface BaseServiceI<T> {
 
 	T selectByKey(T t);
 
-	List<T> selectByExample(Class<T> t);
+	List<T> findAll();
 
 	List<T> selectByPage(T t,int pageSize,int page);
 }
