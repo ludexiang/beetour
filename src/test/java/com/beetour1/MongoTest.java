@@ -37,12 +37,13 @@ public class MongoTest {
 
 	@Test
 	public void test() {
-//		for (int i = 0; i < 100; i++) {
-//			Customer c = new Customer();
-//			c.setFirstName(String.valueOf(i));
-//			c.setLastName(String.valueOf(i + i));
-//			dao.insert(c);
-//		}
+		for (int i = 0; i < 200; i++) {
+			Customer c = new Customer();
+			c.setFirstName(String.valueOf(i));
+			c.setLastName(String.valueOf(i + i));
+			mongo.insert(c);
+		}
+//		mongo.dropCollection(Customer.class);
 //		List<Customer> selectByPage = service.selectByPage(new Customer(), 10, 5);
 //		for (Customer customer : selectByPage) {
 //			System.out.println(customer);

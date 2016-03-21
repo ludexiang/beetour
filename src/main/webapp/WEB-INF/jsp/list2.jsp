@@ -6,21 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>测试</title>
-<link rel="stylesheet" type="text/css" href="../static/css/pagination.css" />
+<link rel="stylesheet" type="text/css" href="static/css/pagination.css" />
 </head>
 <body>
-	<script src="../static/js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="../static/js/jquery.pagination.js"></script>	
-	<script type="text/javascript" src="../static/js/page.js"></script>	
-	<section>
-	<div >
-		<script>
-		$(document).ready(function(){
-			initPagination();			
-		});
-		</script>
-		<section>
-		<div id="ajaxData">
+	<script src="static/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="static/js/jquery.pagination.js"></script>	
+	<script type="text/javascript" src="static/js/page.js"></script>	
 			<input type="hidden" id="page" value="${page}"/>
 			<input type="hidden" id="pageTotal" value="${pageTotal}"/>
 			<c:choose>
@@ -47,11 +38,5 @@
 					<p>温馨提示：暂无订单信息！</p>
 				</c:otherwise>
 			</c:choose> 
-		</div>
-		<div id="Pagination" class="scott"></div>
-	</section>
-
-	</div>
-	</section>
 </body>
 </html>

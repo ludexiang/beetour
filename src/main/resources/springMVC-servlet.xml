@@ -14,7 +14,8 @@
 	<mvc:default-servlet-handler />
 	<!-- 对静态资源文件的访问 支持访问WEB-INF目录 -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/statics/**" location="/statics/js/" />
+	<mvc:resources mapping="/statics/**" location="/statics/css/" />
 	
 
 

@@ -44,8 +44,6 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
 	@Override
 	public List<T> selectByPage(T t, int pageSize, int page) {
-		LOGGER.debug(String.valueOf(page));
-		System.out.println((page * pageSize) - 1);
 		return dao.selectByPage(t, pageSize, ((page - 1) * pageSize) - 1);
 	}
 	

@@ -2,14 +2,15 @@ var initSign=true;
 
 //初始化分页组件
 function initPagination(){
-	var pageNo=parseInt($("#pageNo").val())-1;
-	var num_entries=$("#totalPage").val();
+	var pageNo=parseInt($("#page").val())-1;
+	var num_entries=$("#pageTotal").val();
 	if(num_entries>=1){
 		$("#Pagination").pagination(num_entries,{
 			current_page:pageNo,
 			prev_text:"上一页",
 			next_text:"下一页",
 			link_to:"javascript:void(0);",
+			ellipse_text:"...",
 			callback:pageselectCallback,
 			items_per_page:1
 		});
@@ -23,7 +24,7 @@ function pageselectCallback(page_index, jq){
 		initSign=false;
 	}else{
 		ajaxGetDataList(page_index+1);
-		$("#pageNo").val(page_index+1);
+		$("#page").val(page_index+1);
 	}
     return false;
 }
@@ -31,14 +32,11 @@ function pageselectCallback(page_index, jq){
 
 
 
-function ajaxGetDataList(pageNo){
-	
-	var par_str = fun_comm_return_param();
-	
+function ajaxGetDataList(page){	
 	$.ajax({
 		 type: "POST",
-		  url: "page.do",
-		  data: "pageNo="+pageNo,
+		  url: "list2",
+		  data: "page="+page,
 		  dataType: "html",
 		  success: function(msg){
 			  $("#ajaxData").html(msg);
