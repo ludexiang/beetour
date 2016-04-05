@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="static/js/jquery.pagination.js"></script>	
 	<script type="text/javascript" src="static/js/page.js"></script>	
 			<input type="hidden" id="page" value="${page}"/>
-			<input type="hidden" id="pageTotal" value="${pageTotal}"/>
+			<input type="hidden" id="totalCount" value="${totalCount}"/>
 			<c:choose>
 				<c:when test="${customer != null && customer.size() > 0}">
 					<table class="table">
@@ -21,14 +21,12 @@
 							<th>项目1</th>
 							<th>项目2</th>
 							<th>项目3</th>
-							<th>项目4</th>
 						</tr>
 							<c:forEach var="customer" items="${customer}">
 								<tr>
 									<td><c:out value="${customer.id}" /></td>
 									<td><c:out value="${customer.firstName}" /></td>
 									<td><c:out value="${customer.lastName}" /></td>
-									<td><a href="#">修改</a> <a href="#" class="inner_btn">删除</a>
 									</td>
 								</tr>
 							</c:forEach>

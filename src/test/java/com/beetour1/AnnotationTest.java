@@ -25,8 +25,6 @@ public class AnnotationTest {
 	public void teat() {
 		Customer c = new Customer();
 		c.setId("56e68304f5c2b611ec3ed180");
-		c.setFirstName("lu");
-		c.setLastName("xander");
 		mongo.save(c);
 	}
 

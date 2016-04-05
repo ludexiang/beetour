@@ -15,11 +15,10 @@
     http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
 	">
 
-	 <mongo:db-factory client-uri="mongodb://${mongo.username}:${mongo.password}@${mongo.host}:${mongo.port}/${mongo.database}?maxpoolsize=20"/>
+	 <mongo:db-factory client-uri="mongodb://${mongo.username}:${mongo.password}@${mongo.host}:${mongo.port}/${mongo.database}"/>
 	
 	<bean id="anotherMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-	  <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>
-	  
+	  <constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>	  
 	</bean>
     
     <!-- 使用annotation定义事务 -->

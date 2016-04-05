@@ -36,11 +36,11 @@ jQuery.fn.pagination = function(maxentries, opts) {
         * @return {Array}
         */
         function getInterval() {
-            var ne_half = Math.ceil(opts.num_display_entries / 2);
-            var np = numPages();
-            var upper_limit = np - opts.num_display_entries;
-            var start = current_page > ne_half ? Math.max(Math.min(current_page - ne_half, upper_limit), 0) : 0;
-            var end = current_page > ne_half ? Math.min(current_page + ne_half, np) : Math.min(opts.num_display_entries, np);
+            var ne_half = Math.ceil(opts.num_display_entries / 2);//5
+            var np = numPages();//14
+            var upper_limit = np - opts.num_display_entries;//9
+            var start = current_page > ne_half ? Math.max(Math.min(current_page - ne_half, upper_limit), 0) : 0;//0
+            var end = current_page > ne_half ? Math.min(current_page + ne_half, np) : Math.min(opts.num_display_entries, np);//10
             return [start, end];
         }
 

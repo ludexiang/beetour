@@ -4,8 +4,6 @@ package com.beetour.base;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 /**
  * 通用接口
  */

@@ -1,21 +1,22 @@
-var initSign=true;
+var initSign=false;
 
 //初始化分页组件
 function initPagination(){
 	var pageNo=parseInt($("#page").val())-1;
-	var num_entries=$("#pageTotal").val();
+	var num_entries=$("#totalCount").val();
 	if(num_entries>=1){
 		$("#Pagination").pagination(num_entries,{
 			current_page:pageNo,
 			prev_text:"上一页",
 			next_text:"下一页",
+			num_edge_entries:0,
 			link_to:"javascript:void(0);",
-			ellipse_text:"...",
-			callback:pageselectCallback,
-			items_per_page:1
+	        prev_show_always: false,
+	        next_show_always: false,
+			items_per_page:10,
+			callback:pageselectCallback
+	
 		});
-	}else{
-		$("#Pagination").html("");
 	}
 }
 
@@ -108,7 +109,7 @@ function check_param(){
 }
 
 function fun_onclick_search(){
-	var pageNo=$("#pageNo").val();
+	var page=$("#page").val();
 	var par_str = fun_comm_return_param();
 	if(check_param()){
 	$.ajax({
@@ -117,7 +118,6 @@ function fun_onclick_search(){
 		  data: "a=1"+par_str,
 		  dataType: "html",
 		  success: function(msg){
-//			  ajaxGetDataList(pageNo);
 			  $("#ajaxData").html(msg);
 			  initSign=true;
 			  initPagination();

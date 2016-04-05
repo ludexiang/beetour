@@ -3,6 +3,7 @@ package com.beetour.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.beetour.domain.Customer;
 import com.beetour.service.CustomerService;
 import com.beetour.util.Page;
+import com.beetour.util.UploadUtil;
 
 @Controller
 public class CustomerController {
@@ -36,16 +38,6 @@ public class CustomerController {
 		return "{\"msg\":\"you say:'" + msg + "'\"}";
 	}
 
-	@RequestMapping(value = "/customer/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public Customer getCustomer(@PathVariable("id") String id) {
-		LOGGER.info("id=" + id);
-		Customer c = new Customer();
-		c.setId(id);
-		Customer customer = customerService.selectByKey(c);
-
-		return customer;
-	}
 
 	@RequestMapping("/customers")
 	@ResponseBody
@@ -60,17 +52,12 @@ public class CustomerController {
 		return "list";
 	}
 
-	@RequestMapping("delete")
-	public String delete(Customer customer) {
-		customerService.delete(customer);
-		return "list";
-	}
+
 
 	@RequestMapping(value =  "list/{lists}" )
 	public String getList(Customer customer, @RequestParam(required = false, defaultValue = "1") int page, 
 			@PathVariable(value = "lists") String lists,
 			Model model) {
-
 		Page pages = null;
 		int totalCount = customerService.findAll().size();
 		List<Customer> list = new ArrayList<Customer>();
@@ -84,11 +71,41 @@ public class CustomerController {
 		}
 		model.addAttribute("customer", list);
 		model.addAttribute("page", page);
-		model.addAttribute("pageTotal", pages.getTotalPageCount());
+		model.addAttribute("totalCount", totalCount);
 		if(lists.equals("list2")){			
 			return "list2";
 		} else {
 			return "list";
 		}
+	}
+	
+	@RequestMapping(value =  "getJson" )
+	@ResponseBody
+	public List<Customer> getJson(Customer customer, @RequestParam(required = false, defaultValue = "1") int page, 
+			Model model) {
+		
+		Page pages = null;
+		int totalCount = customerService.findAll().size();
+			List<Customer> list = new ArrayList<Customer>();
+			if (page != 1) {
+				pages = new Page(totalCount, page);
+				list = customerService.selectByPage(customer, pages.getPageSize(), page);
+			} else {
+				pages = new Page(totalCount, 1);
+				list = customerService.selectByPage(customer, pages.getPageSize(), page);
+			}
+		return list;
+	}
+	
+	@RequestMapping(value =  "token" )
+	@ResponseBody
+	public String token(){		
+		String upToken = UploadUtil.getUpToken();
+		return upToken;
+	}
+	
+	@RequestMapping(value =  "upload" )
+	public String upload(){
+		return "upload";
 	}
 }

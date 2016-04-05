@@ -2,8 +2,6 @@ package com.beetour.base;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 public interface BaseDao<T> {
 	
 	void insert(T t);
