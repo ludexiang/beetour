@@ -3,15 +3,15 @@ package com.beetour.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="share")
+@Document(collection = "share")
 public class Share {
 
 	@Id
 	private String id;
-	private String post_id;
+	private String postId;
 	private String adress;
-	private String user_id;
-	private String share_num;
+	private String userId;
+	private String shareNum;
 
 	public String getId() {
 		return id;
@@ -21,12 +21,12 @@ public class Share {
 		this.id = id;
 	}
 
-	public String getPost_id() {
-		return post_id;
+	public String getPostId() {
+		return postId;
 	}
 
-	public void setPost_id(String post_id) {
-		this.post_id = post_id;
+	public void setPostId(String postId) {
+		this.postId = postId;
 	}
 
 	public String getAdress() {
@@ -37,20 +37,20 @@ public class Share {
 		this.adress = adress;
 	}
 
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getShare_num() {
-		return share_num;
+	public String getShareNum() {
+		return shareNum;
 	}
 
-	public void setShare_num(String share_num) {
-		this.share_num = share_num;
+	public void setShareNum(String shareNum) {
+		this.shareNum = shareNum;
 	}
 
 }

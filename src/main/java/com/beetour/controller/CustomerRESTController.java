@@ -18,11 +18,22 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.beetour.domain.Customer;
 import com.beetour.service.CustomerService;
+import com.wordnik.swagger.annotations.ApiOperation;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 @RestController
 @RequestMapping("customer")
 public class CustomerRESTController {
+	
+	/**
+	 说明：
+		其中@ApiOperation和@ApiParam为添加的API相关注解，个参数说明如下：
+		@ApiOperation(value = “接口说明”, httpMethod = “接口请求方式”, response = “接口返回参数类型”, notes = “接口发布说明”；其他参数可参考源码；
+		@ApiParam(required = “是否必须参数”, name = “参数名称”, value = “参数具体描述”
+	 */
+	
+	
+	
 	protected final Logger LOGGER = LoggerFactory.getLogger(CustomerController.class);
 	@Autowired
 	private CustomerService customerService;
@@ -30,6 +41,7 @@ public class CustomerRESTController {
 	// select all
 	@RequestMapping(value = "all", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	@ResponseBody
+	@ApiOperation(hidden = true, value = "")
 	public ResponseEntity<List<Customer>> selectAll() {
 		List<Customer> all = customerService.findAll();
 		if (all == null || all.isEmpty()) {
@@ -43,6 +55,7 @@ public class CustomerRESTController {
 	// select one
 	@RequestMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
 	@ResponseBody
+	@ApiOperation(hidden = true, value = "")
 	public ResponseEntity<Customer> selectOne(@PathVariable("id") String id) {
 		Customer c = new Customer();
 		c.setId(id);
@@ -57,6 +70,7 @@ public class CustomerRESTController {
 	// create
 	@RequestMapping(value = "", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.POST)
 	@ResponseBody
+	@ApiOperation(hidden = true, value = "")
 	public ResponseEntity<Void> create(@RequestBody Customer customer,UriComponentsBuilder ucBuilder) {
 		if (customer.getId() != null){
 			Customer c = customerService.selectByKey(customer);
@@ -77,6 +91,7 @@ public class CustomerRESTController {
 	//update
 	@RequestMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.PUT)
 	@ResponseBody
+	@ApiOperation(hidden = true, value = "")
 	public ResponseEntity<Customer> update(@PathVariable("id") String id,@RequestBody Customer customer) {
 		LOGGER.info("Fetching&Updating One with id:" + id);
 		Customer c = customerService.selectByKey(customer);
@@ -91,12 +106,13 @@ public class CustomerRESTController {
 	// delete
 	@RequestMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.DELETE)
 	@ResponseBody
+	@ApiOperation(hidden = true, value = "")
 	public ResponseEntity<Customer> delete(@PathVariable("id") String id) {
 		LOGGER.info("Fetching&Deleting One with id:" + id);
 	 	Customer customer = new Customer();
 		customer.setId(id);
 		Customer c = customerService.selectByKey(customer);
-		
+			
 		if (c == null) {
 			LOGGER.info("Fetching One with id:" + id + " is not found!");
 			return new ResponseEntity<Customer>(HttpStatus.NOT_FOUND);

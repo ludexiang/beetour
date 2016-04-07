@@ -24,10 +24,10 @@
 
 	<mvc:default-servlet-handler />
 	<!-- 对静态资源文件的访问 支持访问WEB-INF目录 -->
-	<!-- <mvc:resources mapping="/resources/**" location="/resources/" />
-	<mvc:resources mapping="/statics/**" location="/statics/js/" />
-	<mvc:resources mapping="/statics/**" location="/statics/css/" />
-	 -->
+	 <mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/static/**" location="/static/" />
+	<mvc:resources mapping="/static/**" location="/static/" />
+
 	 <mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger/" />
 	
 
