@@ -64,23 +64,23 @@ public class MongoTest {
 //			System.out.println(customer);
 //		}
 //		dao.deleteAll(Customer.class);
-		com.beetour1.Order find = mongo.findById("57061b3c41b1ab1e202f9c66", com.beetour1.Order.class);
-			for (String s : find.getList()) {
-				System.out.println(s);
-			}
-			
-			for(int i = 0; i < find.getList().size(); i++)  
-	        {  
-				String s = find.getList().get(i);   
-				System.out.println(s);
-	        }  
+//		com.beetour1.Order find = mongo.findById("57061b3c41b1ab1e202f9c66", com.beetour1.Order.class);
+//			for (String s : find.getList()) {
+//				System.out.println(s);
+//			}
+//			
+//			for(int i = 0; i < find.getList().size(); i++)  
+//	        {  
+//				String s = find.getList().get(i);   
+//				System.out.println(s);
+//	        }  
 
 //		Set<String> collectionNames = mongo.getCollectionNames();
 //		for (String string : collectionNames) {
 //			System.out.println(string);
 //		}
-//		mongo.dropCollection(Itemgp.class);
-//		mongo.dropCollection(Item.class);
+		mongo.dropCollection(Itemgp.class);
+		mongo.dropCollection(Item.class);
 //		Sort sort = new Sort(Direction.DESC, "firstName");
 //		Query query = new Query();
 //		query.with(sort);
@@ -88,13 +88,13 @@ public class MongoTest {
 //		for (Customer customer : find) {
 //			System.out.println(customer);
 //		}
-			List<String> l = new ArrayList<String>();
-			l.add("3");
-			Query query = new Query(Criteria.where("id").is("57061b3c41b1ab1e202f9c66") );
-			Update update = new Update().set("list", l);
-			mongo.updateFirst(query, update, com.beetour1.Order.class);
-			com.beetour1.Order find1 = mongo.findById("57061b3c41b1ab1e202f9c66", com.beetour1.Order.class);
-			System.out.println(find1);
+//			List<String> l = new ArrayList<String>();
+//			l.add("3");
+//			Query query = new Query(Criteria.where("id").is("57061b3c41b1ab1e202f9c66") );
+//			Update update = new Update().set("list", l);
+//			mongo.updateFirst(query, update, com.beetour1.Order.class);
+//			com.beetour1.Order find1 = mongo.findById("57061b3c41b1ab1e202f9c66", com.beetour1.Order.class);
+//			System.out.println(find1);
 	}
 
 }

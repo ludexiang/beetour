@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.beetour.domain.Customer;
 import com.beetour.service.CustomerService;
 import com.beetour.util.Page;
-import com.beetour.util.UploadUtil;
 
 @Controller
 public class CustomerController {
@@ -63,10 +62,10 @@ public class CustomerController {
 		List<Customer> list = new ArrayList<Customer>();
 
 		if (page != 1) {
-			pages = new Page(totalCount, page);
+			pages = new Page(totalCount, page, 10);
 			list = customerService.selectByPage(customer, pages.getPageSize(), page);
 		} else {
-			pages = new Page(totalCount, 1);
+			pages = new Page(totalCount, 1, 10);
 			list = customerService.selectByPage(customer, pages.getPageSize(), page);
 		}
 		model.addAttribute("customer", list);
@@ -88,21 +87,15 @@ public class CustomerController {
 		int totalCount = customerService.findAll().size();
 			List<Customer> list = new ArrayList<Customer>();
 			if (page != 1) {
-				pages = new Page(totalCount, page);
+				pages = new Page(totalCount, page, 10);
 				list = customerService.selectByPage(customer, pages.getPageSize(), page);
 			} else {
-				pages = new Page(totalCount, 1);
+				pages = new Page(totalCount, 1, 10);
 				list = customerService.selectByPage(customer, pages.getPageSize(), page);
 			}
 		return list;
 	}
 	
-	@RequestMapping(value =  "token" )
-	@ResponseBody
-	public String token(){		
-		String upToken = UploadUtil.getUpToken();
-		return upToken;
-	}
 	
 	@RequestMapping(value =  "upload" )
 	public String upload(){

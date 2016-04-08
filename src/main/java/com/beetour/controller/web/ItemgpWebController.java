@@ -52,6 +52,7 @@ public class ItemgpWebController {
 			LOGGER.info("Fetching One with id:" + id + " is not found!");
 			return "error";
 		}
+		itemgp.setCreated(DateUtil.getDate());
 		itemgpService.update(itemgp);
 		return redirect_list;
 	}
@@ -84,10 +85,10 @@ public class ItemgpWebController {
 		List<Itemgp> list = new ArrayList<Itemgp>();
 
 		if (page != 1) {
-			pages = new Page(totalCount, page);
+			pages = new Page(totalCount, page, 10);
 			list = itemgpService.selectByPage(itemgp, pages.getPageSize(), page);
 		} else {
-			pages = new Page(totalCount, 1);
+			pages = new Page(totalCount, 1, 10);
 			list = itemgpService.selectByPage(itemgp, pages.getPageSize(), page);
 		}
 		model.addAttribute("itemgp", list);

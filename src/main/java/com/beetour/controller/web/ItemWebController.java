@@ -64,7 +64,8 @@ public class ItemWebController {
 			return "error";
 		}
 		boolean updateItemIds = itemgpService.updateItemIds(item);
-		if(updateItemIds){			
+		if(updateItemIds){
+			item.setCreated(DateUtil.getDate());
 			itemService.update(item);
 		}
 		return redirect_list;
@@ -98,10 +99,10 @@ public class ItemWebController {
 		int totalCount = itemService.findAll().size();
 		List<Item> list = new ArrayList<Item>();
 		if (page != 1) {
-			pages = new Page(totalCount, page);
+			pages = new Page(totalCount, page, 10);
 			list = itemService.selectByPage(item, pages.getPageSize(), page);
 		} else {
-			pages = new Page(totalCount, 1);
+			pages = new Page(totalCount, 1, 10);
 			list = itemService.selectByPage(item, pages.getPageSize(), page);
 		}
 		model.addAttribute("item", list);

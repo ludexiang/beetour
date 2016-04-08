@@ -11,7 +11,7 @@ public class Page implements Serializable {
 
 	private int pageNow = 1; // 当前页数
 
-	private int pageSize = 10; // 每页显示记录的条数
+	private int pageSize; // 每页显示记录的条数
 
 	private int totalCount; // 总的记录条数
 
@@ -37,9 +37,10 @@ public class Page implements Serializable {
 	 * @param totalCount
 	 * @param pageNow
 	 */
-	public Page(int totalCount, int pageNow) {
+	public Page(int totalCount, int pageNow,int pageSize) {
 		this.totalCount = totalCount;
 		this.pageNow = pageNow;
+		this.pageSize = pageSize;
 	}
 	
 	/**

@@ -45,6 +45,7 @@ public class ItemgpServiceImpl extends BaseServiceImpl<Itemgp> implements Itemgp
 
 	@Override
 	public boolean updateItemIds(Item item) {
+		
 		return true;
 	}
 

@@ -1,5 +1,6 @@
 package com.beetour.controller.mobile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,14 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.beetour.controller.CustomerController;
 import com.beetour.domain.item.Item;
 import com.beetour.domain.item.Itemgp;
 import com.beetour.service.ItemService;
 import com.beetour.service.ItemgpService;
+import com.beetour.util.Page;
 import com.wordnik.swagger.annotations.ApiOperation;
 
 @RestController
@@ -41,14 +43,26 @@ public class ItemController {
 	@ResponseBody
 	@ApiOperation(value = "项目所有分类", httpMethod = "GET", notes = "id:项目分类id<br/> catetoryName:项目分类名称<br/> "
 			+ "pic:项目分类图片（subTpic：大图地址，subPic：缩略图地址，subSpic：小图地址）<br/> "
-			+ "introduction:项目介绍<br/> 另：忽略其他字段")
-	public ResponseEntity<List<Itemgp>> selectItemgpAll() {
+			+ "introduction:项目介绍<br/> itemIds：包含项目Id<br/> 另：忽略其他字段")
+	public ResponseEntity<List<Itemgp>> selectItemgpAll(@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "10") int rows) {
 		List<Itemgp> all = itemgpService.findAll();
 		if (all == null || all.isEmpty()) {
 			LOGGER.info("Fetching with All is not found!");
 			return new ResponseEntity<List<Itemgp>>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<List<Itemgp>>(all, HttpStatus.OK);
+		Page pages = null;
+		int totalCount = itemgpService.findAll().size();
+		List<Itemgp> list = new ArrayList<Itemgp>();
+		if (page != 1) {
+			pages = new Page(totalCount, page, rows);
+			list = itemgpService.selectByPage(new Itemgp(), pages.getPageSize(), page);
+		} else {
+			pages = new Page(totalCount, 1, rows);
+			list = itemgpService.selectByPage(new Itemgp(), pages.getPageSize(), page);
+		}
+		
+		return new ResponseEntity<List<Itemgp>>(list, HttpStatus.OK);
 	}
 
 	/**
@@ -84,14 +98,25 @@ public class ItemController {
 			+ "harvest:收获<br/> time:时间（startime：起始时间，endtime：结束时间）<br/> "
 			+ "price:价格（baseTotalAmount：市场价，basePreferentialPrice：优惠价，perPrice：团购价）<br/> "
 			+ "costInfo:费用说明<br/> include:包括<br/> notInclude:不包括<br/> "
-			+ "isTop:是否置顶，默认不置顶（false不置顶，true置顶）<br/> ")
-	public ResponseEntity<List<Item>> selectItemAll() {
+			+ "top:是否置顶，默认不置顶（0不置顶，1置顶）<br/> ")
+	public ResponseEntity<List<Item>> selectItemAll(@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "10") int rows) {
 		List<Item> all = itemService.findAll();
 		if (all == null || all.isEmpty()) {
 			LOGGER.info("Fetching with All is not found!");
 			return new ResponseEntity<List<Item>>(HttpStatus.NO_CONTENT);
+		}	
+		Page pages = null;
+		int totalCount = itemService.findAll().size();
+		List<Item> list = new ArrayList<Item>();
+		if (page != 1) {
+			pages = new Page(totalCount, page, rows);
+			list = itemService.selectByPage(new Item(), pages.getPageSize(), page);
+		} else {
+			pages = new Page(totalCount, 1, rows);
+			list = itemService.selectByPage(new Item(), pages.getPageSize(), page);
 		}
-		return new ResponseEntity<List<Item>>(all, HttpStatus.OK);
+		return new ResponseEntity<List<Item>>(list, HttpStatus.OK);
 	}
 	
 	/**
@@ -107,7 +132,7 @@ public class ItemController {
 			+ "harvest:收获<br/> time:时间（startime：起始时间，endtime：结束时间）<br/> "
 			+ "price:价格（baseTotalAmount：市场价，basePreferentialPrice：优惠价，perPrice：团购价）<br/> "
 			+ "costInfo:费用说明<br/> include:包括<br/> notInclude:不包括<br/> "
-			+ "isTop:是否置顶，默认不置顶（false不置顶，true置顶）<br/> ")
+			+ "top:是否置顶，默认不置顶（false不置顶，true置顶）<br/> ")
 	public ResponseEntity<Item> selectItemOne(@PathVariable("id") String id) {
 		Item i = new Item();
 		i.setId(id);
@@ -117,9 +142,5 @@ public class ItemController {
 			return new ResponseEntity<Item>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Item>(item, HttpStatus.OK);
-	}
-	
-	
-	
-
+	}	
 }
