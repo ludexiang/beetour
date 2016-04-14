@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>项目分类</title>
+<title>Banner图片</title>
 <link rel="stylesheet" type="text/css" href="/springmvc-mongo/static/css/pagination.css" />
 </head>
 <body>
 	<script src="/springmvc-mongo/static/js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="/springmvc-mongo/static/js/jquery.pagination.js"></script>	
-	<script type="text/javascript" src="/springmvc-mongo/static/js/web/itemgp.js"></script>	
+	<script type="text/javascript" src="/springmvc-mongo/static/js/web/banner.js"></script>	
 	<section>
 	<script>
 		$(document).ready(function(){		
@@ -20,39 +20,39 @@
 		});
 	</script>
 	<header>
-		<div style="text-align: center;color: red;font-size: 20px;">所有项目分类</div>
+		<div style="text-align: center;color: red;font-size: 20px;">Banner图片</div>
 	</header>
 	<div style="padding-top: 20px;">
 		<section>
 		<div style="text-align: center;">
-		<a style="width:150px;height:50px;font-size:35px;" href="/springmvc-mongo/itemgp/create">增加</a>
+		<a style="width:150px;height:50px;font-size:35px;" href="/springmvc-mongo/banner/create">增加</a>
 		</div>		
 		<div id="ajaxData">
 			<input type="hidden" id="page" value="${page}"/>
 			<input type="hidden" id="totalCount" value="${totalCount}"/>
 			<c:choose>
-				<c:when test="${itemgp != null && itemgp.size() > 0}">
+				<c:when test="${banner != null && banner.size() > 0}">
 					<table width="100%" border="1" cellpadding="2" cellspacing="0">
 						<tr style="text-align: center; color: #0076C8; background-color: #F4FAFF; font-weight: bold">
 							<th >id</th>
-							<th>项目分类名称</th>
-							<th>项目分类图片</th>
-							<th>项目介绍</th>
+							<th>图片</th>
+							<th>介绍</th>
+							<th>是否展示</th>
 							<th>创建时间</th>
 							<th>操作</th>
 						</tr>
-							<c:forEach var="itemgp" items="${itemgp}">
+							<c:forEach var="banner" items="${banner}">
 								<tr style="text-align: center; color: #0076C8; background-color: #F4FAFF; font-weight: bold">
-									<td><c:out value="${itemgp.id}" /></td>
-									<td><c:out value="${itemgp.catetoryName}" /></td>
-									<td>
-									小图：<a href="<c:out value="${itemgp.pic.subSpic}" />"><c:out value="${itemgp.pic.subSpic}" /></a><br>
-									缩略图：<a href="<c:out value="${itemgp.pic.subPic}" />"><c:out value="${itemgp.pic.subPic}" /></a><br>
-									大图：<a href="<c:out value="${itemgp.pic.subTpic}" />"><c:out value="${itemgp.pic.subTpic}" /></a><br>
+									<td><c:out value="${banner.id}" /></td>
+									<td><a href="${banner.pic}">${banner.pic}</a>
 									</td>
-									<td><c:out value="${itemgp.introduction}" /></td>
-									<td> <fmt:formatDate value="${itemgp.created}" pattern="yyyy/MM/dd  HH:mm:ss" /></td>
-									<td><a href="/springmvc-mongo/itemgp/delete?id=${itemgp.id}">删除</a>&nbsp;<a href="/springmvc-mongo/itemgp/updateRedirect?id=${itemgp.id}">修改</a>&nbsp;</td>
+									<td><c:out value="${banner.content}" /></td>
+									<td>
+									<c:if test= "${banner.show == 0}">否</c:if> 
+									<c:if test= "${banner.show == 1}">是</c:if></td> 
+									<td> <fmt:formatDate value="${banner.created}" pattern="yyyy/MM/dd  HH:mm:ss" /></td>
+									<td>
+									<a href="/springmvc-mongo/banner/delete?id=${banner.id}">删除</a>&nbsp;<a href="/springmvc-mongo/banner/updateRedirect?id=${banner.id}">修改</a>&nbsp;</td>
 									</td>
 								</tr>
 							</c:forEach>

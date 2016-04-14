@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -79,12 +81,13 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 			}
 		}
 		Criteria criteria = CriteriaUtil.getCriteriaOfIs(nameAndValue);
-
+		Sort sort = new Sort(Direction.DESC, "id");
 		if (criteria != null) {
 			query = new Query(criteria);
 		} else {
 			query = new Query();
 		}
+		query.with(sort);
 		query.limit(limit);
 		query.skip(skip);
 		List<? extends Object> find = mongo.find(query, t.getClass());

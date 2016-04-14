@@ -22,7 +22,7 @@
 	<header>
 		<div style="text-align: center;color: red;font-size: 20px;">项目分类增加</div>
 	</header>
-	<div style="padding-top: 20px;">
+	<div style="padding-top: 20px; padding-left:200px;">
 	<form:form modelAttribute="itemgp" method="post" action="save">
 		 <div>
 			<label>项目分类名称 </label>

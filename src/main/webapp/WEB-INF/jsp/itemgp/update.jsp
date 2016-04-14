@@ -22,7 +22,7 @@
 	<header>
 		<div style="text-align: center;color: red;font-size: 20px;">项目分类修改</div>
 	</header>
-	<div style="padding-top: 20px;">
+	<div style="padding-top: 20px; padding-left:200px;">
 	<form:form modelAttribute="itemgp" method="post" action="update">
 		<input type="hidden" name="id" value="${itemgp.id}"/>
 		 <div>

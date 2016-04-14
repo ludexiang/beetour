@@ -41,9 +41,10 @@
 									<td style="height: 200px;"><c:out value="${item.id}" /></td>
 									<td><c:out value="${item.entity.entityName}" /></td>
 									<td><c:out value="${item.entity.entityName}" /></td>
-									<td>小图：<c:out value="${item.pic.subSpic}" /><br>
-										缩略图：<c:out value="${item.pic.subPic}" /><br>
-										大图：<c:out value="${item.pic.subTpic}" /><br>
+									<td>
+									小图：<a href="<c:out value="${item.pic.subSpic}" />"><c:out value="${item.pic.subSpic}" /></a><br>
+									缩略图：<a href="<c:out value="${item.pic.subPic}" />"><c:out value="${item.pic.subPic}" /></a><br>
+									大图：<a href="<c:out value="${item.pic.subTpic}" />"><c:out value="${item.pic.subTpic}" /></a><br>
 									</td>
 									<td><c:out value="${item.destination}" /></td>
 									<td><c:out value="${item.synopsis}" /></td>

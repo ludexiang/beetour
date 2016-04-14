@@ -93,16 +93,17 @@ public class ItemWebController {
 	@RequestMapping(value =  "{lists}" )
 	@ApiOperation(hidden = true, value = "")
 	public String getList(Item item, @RequestParam(required = false, defaultValue = "1") int page, 
+			@RequestParam(required = false, defaultValue = "10") int rows,
 			@PathVariable(value = "lists") String lists,
 			Model model) {
 		Page pages = null;
 		int totalCount = itemService.findAll().size();
 		List<Item> list = new ArrayList<Item>();
 		if (page != 1) {
-			pages = new Page(totalCount, page, 10);
+			pages = new Page(totalCount, page, rows);
 			list = itemService.selectByPage(item, pages.getPageSize(), page);
 		} else {
-			pages = new Page(totalCount, 1, 10);
+			pages = new Page(totalCount, 1, rows);
 			list = itemService.selectByPage(item, pages.getPageSize(), page);
 		}
 		model.addAttribute("item", list);

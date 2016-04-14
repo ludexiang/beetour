@@ -1,6 +1,7 @@
 var initSign=false;
 
 //初始化分页组件
+var rows = 10;
 function initPagination(){
 	var pageNo=parseInt($("#page").val())-1;
 	var num_entries=$("#totalCount").val();
@@ -13,7 +14,7 @@ function initPagination(){
 			link_to:"javascript:void(0);",
 	        prev_show_always: false,
 	        next_show_always: false,
-			items_per_page:10,
+			items_per_page:rows,
 			callback:pageselectCallback
 	
 		});
@@ -37,7 +38,7 @@ function ajaxGetDataList(page){
 	$.ajax({
 		 type: "POST",
 		  url: "ajax",
-		  data: "page="+page,
+		  data: "page="+page + "&rows=" + rows,
 		  dataType: "html",
 		  success: function(msg){
 			  $("#ajaxData").html(msg);
